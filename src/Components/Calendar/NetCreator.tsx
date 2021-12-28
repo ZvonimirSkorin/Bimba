@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import { useState } from "react";
+import kalendar from "../Calendar";
 import "./NetCreator.scss";
 
-export const NetItems: React.FC<{ setEvents: Function }> = ({ setEvents }) => {
+export const NetItems: React.FC<{ setEvents: Function; selectedDay: string }> = ({ setEvents, selectedDay }) => {
   const [open, setOpen] = useState<boolean | number>(false);
   return (
     <div>
@@ -18,7 +19,7 @@ export const NetItems: React.FC<{ setEvents: Function }> = ({ setEvents }) => {
           ></div>
         );
       })}
-      {open ? <AddNewItem open={open} setOpen={setOpen} setEvents={setEvents} /> : <></>}
+      {open ? <AddNewItem selectedDay={selectedDay} open={open} setOpen={setOpen} setEvents={setEvents} /> : <></>}
       <section className="hour">
         {new Array(24).fill(0).map((v, index) => {
           return (
@@ -32,7 +33,12 @@ export const NetItems: React.FC<{ setEvents: Function }> = ({ setEvents }) => {
   );
 };
 
-const AddNewItem: React.FC<{ open: boolean | number; setOpen: Function; setEvents: Function }> = ({ open, setOpen, setEvents }) => {
+const AddNewItem: React.FC<{ open: boolean | number; setOpen: Function; setEvents: Function; selectedDay: string }> = ({
+  open,
+  setOpen,
+  setEvents,
+  selectedDay,
+}) => {
   const name = useRef<HTMLInputElement>(null);
   const when = useRef<HTMLInputElement>(null);
   const duration = useRef<HTMLInputElement>(null);
@@ -48,11 +54,16 @@ const AddNewItem: React.FC<{ open: boolean | number; setOpen: Function; setEvent
       <section className="AddEvent">
         <input ref={when} type={"text"} placeholder="when" />
         <input ref={duration} type={"text"} placeholder="duration" />
-        <input ref={date} type="date" placeholder="date" />
+        <div>Datum: {selectedDay}</div>
         <input ref={name} type={"text"} placeholder="name" />
         <button
           onClick={() => {
-            setEvents({ start: when.current?.value, duration: duration.current?.value, user: name.current?.value, date: new Date().getDate() });
+            setEvents({
+              start: when.current?.value,
+              duration: duration.current?.value,
+              user: name.current?.value,
+              date: selectedDay,
+            });
             setOpen(false);
           }}
         >
