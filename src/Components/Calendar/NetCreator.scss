@@ -1,0 +1,16 @@
+.newItem{
+    position: fixed;
+    top:0; left:0; right:0;bottom:0;
+    z-index: 1000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.AddEvent{
+    padding:4rem 1rem;
+    background-color: white;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+}

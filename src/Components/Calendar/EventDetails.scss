@@ -1,0 +1,27 @@
+.event{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position:fixed;
+    top:0;left:0;bottom: 0;right:0;
+    background-color: rgba(0, 0, 0, 0.322);
+    
+}
+
+.eventBox{
+    width:200px;
+    height: auto;
+    padding:4rem 0;
+    background-color: white;
+    border-radius: 1rem;
+}
+
+.blackPart{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index: -1;
+    background-color: black;
+}
